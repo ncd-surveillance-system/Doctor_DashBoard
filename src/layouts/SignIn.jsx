@@ -145,6 +145,7 @@ class SignIn extends Component {
                 uiConfig={this.uiConfig}
                 firebaseAuth={firebase.auth()}
               />
+              
             </Paper>
           </main>
         )}
