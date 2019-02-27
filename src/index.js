@@ -7,8 +7,7 @@ import { Router, Route, Switch, Redirect } from "react-router-dom";
 import Landing from "./layouts/Landing";
 import { createBrowserHistory } from "history";
 import Dashboard from "./layouts/Dashboard";
-
-const hist = createBrowserHistory();
+import hist from "./history";
 
 ReactDOM.render(
   <Router history={hist}>

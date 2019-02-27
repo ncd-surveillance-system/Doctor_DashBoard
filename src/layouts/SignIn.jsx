@@ -18,7 +18,8 @@ import { Redirect } from "react-router-dom";
 
 firebase.initializeApp({
   apiKey: "AIzaSyBfbeUhDGFqYDTS889Y8RpVkXtXLWFH5iQ",
-  authDomain: "ncd-surveillance-system.firebaseapp.com"
+  authDomain: "ncd-surveillance-system.firebaseapp.com",
+  databaseURL: "https://ncd-surveillance-system.firebaseio.com/"
 });
 
 const styles = theme => ({
@@ -145,7 +146,6 @@ class SignIn extends Component {
                 uiConfig={this.uiConfig}
                 firebaseAuth={firebase.auth()}
               />
-              
             </Paper>
           </main>
         )}
