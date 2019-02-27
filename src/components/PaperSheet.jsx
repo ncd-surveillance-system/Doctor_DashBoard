@@ -8,7 +8,8 @@ const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
+    paddingBottom: theme.spacing.unit * 2,
+    backgroundColor: '#FFB3FF'  
   }
 });
 
@@ -23,6 +24,7 @@ function PaperSheet(props) {
         </Typography>
         <Typography component="p">12-09-2018 22:09:23</Typography>
       </Paper>
+      <br/>
     </div>
   );
 }

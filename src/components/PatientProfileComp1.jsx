@@ -88,6 +88,7 @@ class PatientProfile extends Component {
   render() {
     return (
       <div>
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Lato" rel="stylesheet"></link>
         <div
           style={{ width: "1450px", marginRight: "25px", marginLeft: "25px" }}
         >

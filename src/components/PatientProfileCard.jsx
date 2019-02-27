@@ -7,14 +7,9 @@ import Typography from "@material-ui/core/Typography";
 
 const styles = {
   root: {
-    color: "White",
-    backgroundColour: "Black"
+    
   },
   card: {
-    Width: ""
-  },
-  title: {
-    fontSize: 14
   },
   pos: {
     marginBottom: 12
@@ -25,34 +20,37 @@ function SimpleCard(props) {
   const { classes } = props;
 
   return (
+
     <div className={classes.root}>
       <Card className={classes.card}>
         <CardContent>
-          <Typography
-            className={classes.title}
-            color="textSecondary"
-            gutterBottom
-          >
-            Patient Name
+          <div style={{color:"Red",backgroundColor:"#FFD662",margin:'5px'}}>
+          <div style={{padding:'20px'}}>
+          <Typography variant="h5" component="h2" style={{fontFamily:'Lato'}}>
+            PatientName: {props["name"]}
           </Typography>
+          <Typography variant="h5" component="h2" style={{fontFamily:'Lato'}}>
+            Age: {props["age"]}
+          </Typography>
+          <Typography variant="h5" component="h2" style={{fontFamily:'Lato'}}>
+            Sex: {props["sex"]}
+          </Typography>
+          <Typography variant="h5" component="h2" style={{fontFamily:'Lato'}}>
+            Weight: 100kg
+          </Typography>
+          <Typography variant="h5" component="h2" style={{fontFamily:'Lato'}}>
+            Height: 1.75m
+          </Typography>
+          <Typography variant="h5" component="h2" style={{fontFamily:'Lato'}}>
+            Smoking: No
+          </Typography>
+          <Typography variant="h5" component="h2" style={{fontFamily:'Lato'}}>
+            Exercise: Yes
+          </Typography>
+          </div>
+         
+          </div>
 
-          <Typography variant="h5" component="h2">
-            {props["name"]}
-          </Typography>
-
-          <Typography className={classes.pos} color="textSecondary">
-            <span>Age: {props["age"]} </span>
-            <br />
-            <span>Sex: {props["sex"]}</span>
-            <br />
-            <span>Weight: 100Kg</span>
-            <br />
-            <span>Height: 1.75m</span>
-            <br />
-            <span>Smoking: No</span>
-            <br />
-            <span>Exercise: Yes</span>
-          </Typography>
         </CardContent>
       </Card>
     </div>

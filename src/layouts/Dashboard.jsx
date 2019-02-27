@@ -47,7 +47,7 @@ const styles = theme => ({
     fontFamily: "Open Sans"
   },
   QRCode: {
-    marginLeft: "20px"
+    marginLeft: "60px"
   },
   drawerPaper: {
     width: drawerWidth
@@ -125,7 +125,7 @@ class PermanentDrawerLeft extends Component {
                 Scan the QR code with your app
                 <br />
                 <br />
-                <QRCode value={this.state.name} />
+                <QRCode value={this.state.name} className={classes.QRCode}/>
                 <br />
                 <br />
                 <br />
