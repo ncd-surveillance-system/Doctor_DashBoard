@@ -9,7 +9,7 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    backgroundColor: "#85DCB0"
+    backgroundColor: "#E8FFFF"
   }
 });
 
