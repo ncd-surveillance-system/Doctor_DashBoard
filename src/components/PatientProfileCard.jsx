@@ -24,7 +24,7 @@ function SimpleCard(props) {
     <div className={classes.root}>
       <Card className={classes.card}>
         <CardContent>
-          <div style={{color:"Red",backgroundColor:"#FFD662",margin:'5px'}}>
+          <div style={{color:"Red",backgroundColor:"#E8A87C",margin:'5px'}}>
           <div style={{padding:'20px'}}>
           <Typography variant="h5" component="h2" style={{fontFamily:'Lato'}}>
             PatientName: {props["name"]}

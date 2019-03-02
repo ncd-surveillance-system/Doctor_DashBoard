@@ -18,7 +18,8 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     display: "flex",
-    fontFamily: "Open Sans"
+    fontFamily: "Open Sans",
+    backgroundColor:""
   },
 
   signOut: {

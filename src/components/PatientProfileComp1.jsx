@@ -18,11 +18,14 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import { withStyles } from "@material-ui/core/styles";
+import Grid from '@material-ui/core/Grid';
+
 
 const styles = theme => ({
   root: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    flexGrow:1
   },
   formControl: {
     margin: theme.spacing.unit,
@@ -30,6 +33,10 @@ const styles = theme => ({
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2
+  },
+  grid:{
+    flexDirection:'row',
+    flexWrap:''
   }
 });
 
@@ -136,10 +143,18 @@ class PatientProfile extends Component {
           <center>
             <h1>Medical Records</h1>
           </center>
-          {/* Just iterate over prascription and display it */}
-          {Object.keys(this.state.prev_presc).map(presc => (
+          <div style={{}}>
+          <Grid item xs={12}>
+            {/* Just iterate over prascription and display it */}
+            {Object.keys(this.state.prev_presc).map(presc => (
             <PaperSheet key={presc} {...this.state.prev_presc[presc]} />
           ))}
+          </Grid>
+          </div>
+          
+          
+          
+          
           <FloatingActionButtons onClick={this.handleFabOnclick} />
 
           <Dialog
