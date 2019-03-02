@@ -20,9 +20,22 @@ function PaperSheet(props) {
     <div>
       <Paper className={classes.root} elevation={1}>
         <Typography variant="h5" component="h3">
-          {props["quick_walking"]}
+          Quick-Walking:{props["quick_walking"]}
+          <br/>
+          Exercise More than 30 minutes:{props["excersize_more_than_30_min"]}
+          <br/>
+          Medication for Diabetes:{props["medication_for_diabetes"]}
+          <br/>
+          Medication for hypertension:{props["medication_for_hypertension"]}
+          <br/>
+          Other Symptopms:{props["othet_symptoms"]}
+          <br/>
+          Medicine:{props["prescription"]}
+          <br/>
+          
+
         </Typography>
-        <Typography component="p">12-09-2018 22:09:23</Typography>
+        <Typography component="p">02-03-2019</Typography>
       </Paper>
       <br />
     </div>

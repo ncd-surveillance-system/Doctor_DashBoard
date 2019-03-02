@@ -117,7 +117,7 @@ class PermanentDrawerLeft extends Component {
               <Divider />
               <List className={classes.firstList}>
                 <center>
-                  <p> {this.state.name}</p>
+                  <p>Dr. {this.state.name}</p>
                   <p>{this.state.email}</p>
                   <p>{this.state.contact}</p>
                 </center>
