@@ -9,7 +9,7 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    backgroundColor: '#FFB3FF'  
+    backgroundColor: "#FFB3FF"
   }
 });
 
@@ -20,11 +20,11 @@ function PaperSheet(props) {
     <div>
       <Paper className={classes.root} elevation={1}>
         <Typography variant="h5" component="h3">
-          Fever
+          {props["quick_walking"]}
         </Typography>
         <Typography component="p">12-09-2018 22:09:23</Typography>
       </Paper>
-      <br/>
+      <br />
     </div>
   );
 }

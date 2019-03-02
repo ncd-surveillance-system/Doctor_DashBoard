@@ -44,7 +44,8 @@ class CustomizedTable extends Component {
       .database()
       .ref("patients")
       .once("value", snapshot => {
-        this.setState({ userData: snapshot.val() });
+        var dat = snapshot.val();
+        this.setState({ userData: dat });
       });
   };
 
@@ -54,6 +55,18 @@ class CustomizedTable extends Component {
     localStorage.setItem("user", user);
     hist.push("/index/patientList/patientProfile");
   }
+
+  checkForPresence = docs => {
+    var found = false;
+    var doc = localStorage.getItem("doctor_username");
+    for (var i = 0; i < docs.length; i++) {
+      if (docs[i] == doc) {
+        found = true;
+        break;
+      }
+    }
+    return found;
+  };
 
   render() {
     const { classes } = this.props;
@@ -69,31 +82,41 @@ class CustomizedTable extends Component {
               <CustomTableCell>Phone Number</CustomTableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {Object.keys(this.state.userData).map(user => (
-              <TableRow
-                className={classes.row}
-                key={user}
-                onClick={() => this.onRowItemClick(user)}
-              >
-                <CustomTableCell component="th" scope="row">
-                  {user}
-                </CustomTableCell>
-                <CustomTableCell>
-                  {this.state.userData[user]["personal_details"]["name"]}
-                </CustomTableCell>
-                <CustomTableCell>
-                  {this.state.userData[user]["personal_details"]["sex"]}
-                </CustomTableCell>
-                <CustomTableCell>
-                  {this.state.userData[user]["personal_details"]["age"]}
-                </CustomTableCell>
-                <CustomTableCell>
-                  {this.state.userData[user]["personal_details"]["phoneNumber"]}
-                </CustomTableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+          {Object.keys(this.state.userData).map(user => (
+            <TableBody>
+              {this.checkForPresence(
+                this.state.userData[user]["doctors_visited"]
+              ) ? (
+                <TableRow
+                  className={classes.row}
+                  key={user}
+                  onClick={() => this.onRowItemClick(user)}
+                >
+                  <CustomTableCell component="th" scope="row">
+                    {user}
+                  </CustomTableCell>
+                  <CustomTableCell>
+                    {this.state.userData[user]["personal_details"]["name"]}
+                  </CustomTableCell>
+                  <CustomTableCell>
+                    {this.state.userData[user]["personal_details"]["sex"]}
+                  </CustomTableCell>
+                  <CustomTableCell>
+                    {this.state.userData[user]["personal_details"]["age"]}
+                  </CustomTableCell>
+                  <CustomTableCell>
+                    {
+                      this.state.userData[user]["personal_details"][
+                        "phoneNumber"
+                      ]
+                    }
+                  </CustomTableCell>
+                </TableRow>
+              ) : (
+                console.log("nothing")
+              )}
+            </TableBody>
+          ))}
         </Table>
       </Paper>
     );

@@ -22,7 +22,12 @@ class Landing extends Component {
       <div>
         {this.state.isSignedIn ? (
           <div>
-            <Button variant="contained" color="primary" onClick={this.logout} style={{marginLeft:'70px'}}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.logout}
+              style={{ marginLeft: "70px" }}
+            >
               Sign out
             </Button>
           </div>

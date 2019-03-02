@@ -12,6 +12,26 @@ import TextField from "@material-ui/core/TextField";
 import ReactLoading from "react-loading";
 import Button from "@material-ui/core/Button";
 import FileBase64 from "react-file-base64";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120
+  },
+  selectEmpty: {
+    marginTop: theme.spacing.unit * 2
+  }
+});
 
 class PatientProfile extends Component {
   state = {
@@ -21,10 +41,15 @@ class PatientProfile extends Component {
     smoking: "No",
     uid: "",
     fab_open: false,
-    prescription: ``,
-    description: ``,
-    location: ``,
-    prev_presc: []
+    othet_symptoms: ``,
+    excersize_more_than_30_min: ``,
+    medication_for_diabetes: ``,
+    medication_for_hyperlipidemia: "",
+    medication_for_hypertension: "",
+    quick_walking: "",
+    prescription: "",
+    dosage: "",
+    prev_presc: ""
   };
   componentDidMount = () => {
     firebase
@@ -38,7 +63,7 @@ class PatientProfile extends Component {
           age: data["personal_details"]["age"],
           sex: data["personal_details"]["sex"],
           uid: data["personal_details"]["uid"],
-          prev_presc: data["prescriptions"]
+          prev_presc: data["diagnosis"]
         });
       });
   };
@@ -54,13 +79,20 @@ class PatientProfile extends Component {
 
   hadleFabSubmit = () => {
     console.log("subm");
+    var presc = {};
+    presc[this.state.prescription] = this.state.dosage;
+    console.log(presc);
     firebase
       .database()
-      .ref("patients/" + localStorage.getItem("user") + "/prescriptions")
+      .ref("patients/" + localStorage.getItem("user") + "/diagnosis")
       .push({
-        prescription: this.state.prescription,
-        description: this.state.description,
-        location: this.state.location
+        othet_symptoms: this.state.othet_symptoms,
+        excersize_more_than_30_min: this.state.excersize_more_than_30_min,
+        medication_for_diabetes: this.state.medication_for_diabetes,
+        medication_for_hyperlipidemia: this.state.medication_for_hyperlipidemia,
+        medication_for_hypertension: this.state.medication_for_hypertension,
+        quick_walking: this.state.quick_walking,
+        prescription: presc
       })
       .then(data => {
         //success callback
@@ -73,22 +105,24 @@ class PatientProfile extends Component {
       });
   };
 
-  prescription_handler = e => {
-    this.setState({ prescription: e.target.value });
+  handleInputChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+    console.log(e.target.value);
   };
-
-  description_handler = e => {
-    this.setState({ description: e.target.value });
-  };
-
-  location_hanlder = e => {
-    this.setState({ location: e.target.value });
+  handlePresc = e => {
+    this.setState({ dosage: e.target.value });
+    console.log(e.target.value);
   };
 
   render() {
+    const { classes } = this.props;
+
     return (
       <div>
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Lato" rel="stylesheet"></link>
+        <link
+          href="https://fonts.googleapis.com/css?family=Roboto+Lato"
+          rel="stylesheet"
+        />
         <div
           style={{ width: "1450px", marginRight: "25px", marginLeft: "25px" }}
         >
@@ -104,7 +138,7 @@ class PatientProfile extends Component {
           </center>
           {/* Just iterate over prascription and display it */}
           {Object.keys(this.state.prev_presc).map(presc => (
-            <PaperSheet prescription={presc} />
+            <PaperSheet key={presc} {...this.state.prev_presc[presc]} />
           ))}
           <FloatingActionButtons onClick={this.handleFabOnclick} />
 
@@ -124,30 +158,104 @@ class PatientProfile extends Component {
               <TextField
                 autoFocus
                 margin="dense"
-                id="desrciption"
-                label="Description"
+                id="othet_symptoms"
+                label="Symptoms"
                 type="text"
                 fullWidth
-                onChange={this.description_handler}
+                onChange={this.handleInputChange}
               />
               <TextField
                 autoFocus
                 margin="dense"
-                id="prescription"
-                label="Prescription"
+                id="excersize_more_than_30_min"
+                label="Excersize more than 30 min"
                 type="text"
                 fullWidth
-                onChange={this.prescription_handler}
+                onChange={this.handleInputChange}
               />
               <TextField
                 autoFocus
                 margin="dense"
-                id="location"
-                label="Location"
+                id="medication_for_diabetes"
+                label="Medication for diabetes exist?"
                 type="text"
-                onChange={this.location_hanlder}
+                onChange={this.handleInputChange}
                 fullWidth
               />
+
+              <TextField
+                autoFocus
+                margin="dense"
+                id="medication_for_hyperlipidemia"
+                label="Medication for hyperlipidemia exist?"
+                type="text"
+                onChange={this.handleInputChange}
+                fullWidth
+              />
+
+              <TextField
+                autoFocus
+                margin="dense"
+                id="medication_for_hypertension"
+                label="Medication for hypertension exist?"
+                type="text"
+                onChange={this.handleInputChange}
+                fullWidth
+              />
+
+              <TextField
+                autoFocus
+                margin="dense"
+                id="quick_walking"
+                label="Do patient Excersize? "
+                type="text"
+                onChange={this.handleInputChange}
+                fullWidth
+              />
+
+              <form className={classes.root} autoComplete="off">
+                <TextField
+                  id="prescription"
+                  label="Medicine Name"
+                  defaultValue=""
+                  className={classes.textField}
+                  onChange={this.handleInputChange}
+                  margin="normal"
+                />
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel
+                    ref={ref => {
+                      this.InputLabelRef = ref;
+                    }}
+                    htmlFor="outlined-dosage-simple"
+                  >
+                    Dosage
+                  </InputLabel>
+                  <Select
+                    value={this.state.dosage}
+                    onChange={this.handlePresc}
+                    id="dosage"
+                    input={
+                      <OutlinedInput
+                        labelWidth={this.state.labelWidth}
+                        name="dosage"
+                        id="outlined-dosage-simple"
+                      />
+                    }
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={"1-0-0"}>1-0-0</MenuItem>
+                    <MenuItem value={"0-1-0"}>0-1-0</MenuItem>
+                    <MenuItem value={"0-0-1"}>0-0-1</MenuItem>
+                    <MenuItem value={"1-1-0"}>1-1-0</MenuItem>
+                    <MenuItem value={"0-1-1"}>0-1-1</MenuItem>
+                    <MenuItem value={"1-0-1"}>1-0-1</MenuItem>
+                    <MenuItem value={"1-1-1"}>1-1-1</MenuItem>
+                  </Select>
+                </FormControl>
+              </form>
 
               <br />
               <br />
@@ -180,4 +288,4 @@ class PatientProfile extends Component {
   }
 }
 
-export default PatientProfile;
+export default withStyles(styles)(PatientProfile);

@@ -79,6 +79,7 @@ class PermanentDrawerLeft extends Component {
       }
       if (user.displayName) {
         this.setState({ name: user.displayName });
+        localStorage.setItem("doctor_username", user.displayName);
       }
       if (user.phoneNumber) {
         this.setState({ contact: user.phoneNumber });
@@ -125,7 +126,7 @@ class PermanentDrawerLeft extends Component {
                 Scan the QR code with your app
                 <br />
                 <br />
-                <QRCode value={this.state.name} className={classes.QRCode}/>
+                <QRCode value={this.state.name} className={classes.QRCode} />
                 <br />
                 <br />
                 <br />
