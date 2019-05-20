@@ -30,12 +30,12 @@ function PaperSheet(props) {
           <br/>
           Other Symptopms:{props["othet_symptoms"]}
           <br/>
-          Medicine:{props["prescription"]}
+          {/* Medicine:{props["prescription"]} */}
           <br/>
           
 
         </Typography>
-        <Typography component="p">02-03-2019</Typography>
+        <Typography component="p">17-05-2019</Typography>
       </Paper>
       <br />
     </div>

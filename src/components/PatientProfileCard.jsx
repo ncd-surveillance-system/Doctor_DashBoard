@@ -36,10 +36,10 @@ function SimpleCard(props) {
             Sex: {props["sex"]}
           </Typography>
           <Typography variant="h5" component="h2" style={{fontFamily:'Lato'}}>
-            Weight: 100kg
+            Weight: 64
           </Typography>
           <Typography variant="h5" component="h2" style={{fontFamily:'Lato'}}>
-            Height: 1.75m
+            Height: 175
           </Typography>
           <Typography variant="h5" component="h2" style={{fontFamily:'Lato'}}>
             Smoking: No

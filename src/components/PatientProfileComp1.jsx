@@ -145,9 +145,8 @@ class PatientProfile extends Component {
           </center>
           <div style={{}}>
           <Grid item xs={12}>
-            {/* Just iterate over prascription and display it */}
             {Object.keys(this.state.prev_presc).map(presc => (
-            <PaperSheet key={presc} {...this.state.prev_presc[presc]} />
+            <PaperSheet key={presc} {...(this.state.prev_presc[presc])} />
           ))}
           </Grid>
           </div>
